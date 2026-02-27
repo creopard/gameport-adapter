@@ -14,11 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-// This switch causes the SW Precision Pro to use the shift key as
-// originally intended: Separate button events are created depending
-// on whether the shift button is pressed or not.
-//#define SWPPSHIFT
-
 #pragma once
 
 #include "Buffer.h"
@@ -352,12 +347,7 @@ template <>
 class Sidewinder::Decoder<Sidewinder::Model::SW_PRECISION_PRO> {
 public:
   static const Description &getDescription() {
-#ifndef SWPPSHIFT
-    static const Description desc{"MS Sidewinder Precision Pro", 4, 9, 1};
-#endif
-#ifdef SWPPSHIFT
     static const Description desc{"MS Sidewinder Precision Pro", 4, 16, 1};
-#endif
     return desc;
   }
 
@@ -404,16 +394,10 @@ public:
     state.axes[2] = map(bits(36, 6), 0, 63, 0, 1023);
     state.axes[3] = map(bits(29, 7), 0, 127, 0, 1023);
     state.hat = bits(42, 4);
-#ifndef SWPPSHIFT
-    state.buttons = ~bits(0, 9);
-#endif
-#ifdef SWPPSHIFT
-    if (bits(8, 1)) {
-      state.buttons = (255&(~bits(0, 8)));
-    } else {
-      state.buttons = ((255&(~bits(0, 8))) << 8);
+    state.buttons = ~bits(0, 8) & 0xFF;
+    if (bits(8, 1) == 0) {
+      state.buttons <<= 8;
     }
-#endif
     return true;
   }
 };
@@ -424,12 +408,7 @@ template <>
 class Sidewinder::Decoder<Sidewinder::Model::SW_FORCE_FEEDBACK_PRO> {
 public:
   static const Description &getDescription() {
-#ifndef SWPPSHIFT
-    static const Description desc{"MS Sidewinder Force Feedback Pro", 4, 9, 1};
-#endif
-#ifdef SWPPSHIFT
     static const Description desc{"MS Sidewinder Force Feedback Pro", 4, 16, 1};
-#endif
     return desc;
   }
 
