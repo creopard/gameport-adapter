@@ -347,7 +347,7 @@ template <>
 class Sidewinder::Decoder<Sidewinder::Model::SW_PRECISION_PRO> {
 public:
   static const Description &getDescription() {
-    static const Description desc{"MS Sidewinder Precision Pro", 4, 9, 1};
+    static const Description desc{"MS Sidewinder Precision Pro", 4, 16, 1};
     return desc;
   }
 
@@ -394,8 +394,10 @@ public:
     state.axes[2] = map(bits(36, 6), 0, 63, 0, 1023);
     state.axes[3] = map(bits(29, 7), 0, 127, 0, 1023);
     state.hat = bits(42, 4);
-    state.buttons = ~bits(0, 9);
-
+    state.buttons = ~bits(0, 8) & 0xFF;
+    if (bits(8, 1) == 0) {
+      state.buttons <<= 8;
+    }
     return true;
   }
 };
@@ -406,7 +408,7 @@ template <>
 class Sidewinder::Decoder<Sidewinder::Model::SW_FORCE_FEEDBACK_PRO> {
 public:
   static const Description &getDescription() {
-    static const Description desc{"MS Sidewinder Force Feedback Pro", 4, 9, 1};
+    static const Description desc{"MS Sidewinder Force Feedback Pro", 4, 16, 1};
     return desc;
   }
 

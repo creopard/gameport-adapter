@@ -86,8 +86,8 @@ ThrustMaster                 | 4       | 3     | 1    | 1010  | Analogue   | FCS
 Sidewinder GamePad           | 10      | 2     | 0    | 1110  | Sidewinder |
 Sidewinder 3D Pro            | 8       | 4     | 1    | 1110  | Sidewinder |
 Sidewinder 3D Pro Plus       | 9       | 4     | 1    | 1110  | Sidewinder | First version of Precision Pro
-Sidewinder Precision Pro     | 9       | 4     | 1    | 1110  | Sidewinder |
-Sidewinder FFB Pro           | 9       | 4     | 1    | 1110  | Sidewinder | FFB not yet implemented
+Sidewinder Precision Pro     | 16      | 4     | 1    | 1110  | Sidewinder | Shift doubbles the buttons
+Sidewinder FFB Pro           | 16      | 4     | 1    | 1110  | Sidewinder | FFB not yet implemented
 Sidewinder FFB Wheel         | 8       | 3     | 0    | 1110  | Sidewinder | FFB not yet implemented
 Gravis GamePad Pro           | 10      | 2     | 0    | 0001  | GrIP       |
 Logitech WingMan Extreme     | 6       | 3     | 1    | 1001  | ADI        |
